@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,11 +7,9 @@ import {
 
 interface Props {
   componentId: string;
-};
+}
 
 const Cocktail = ({ componentId }: Props) => {
-  console.log('props', componentId);
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Cocktail!</Text>

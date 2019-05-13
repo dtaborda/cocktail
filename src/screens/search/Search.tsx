@@ -1,21 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import {
   StyleSheet,
   Text,
-  View,
   TouchableHighlight,
+  View,
 } from 'react-native';
 
 import { cocktailScreen } from '../';
 
 interface Props {
   componentId: string;
-};
+}
 
 const Search = ({ componentId }: Props) => {
   const onGoCocktail = () => {
-    cocktailScreen(componentId)
-  }
+    cocktailScreen(componentId);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Search!</Text>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   cocktail: {
     backgroundColor: 'tomato',
-  }
+  },
 });
 
 export default Search;

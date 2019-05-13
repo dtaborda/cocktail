@@ -2,7 +2,7 @@ import { Navigation } from 'react-native-navigation';
 import { Screens, startApp } from './screens';
 
 // Register screens
-Screens.forEach((ScreenComponent, key) => 
+Screens.forEach((ScreenComponent, key) =>
   Navigation.registerComponent(key, () => ScreenComponent));
 
 Navigation.events().registerAppLaunchedListener(() => {
@@ -17,6 +17,6 @@ Navigation.events().registerComponentDidAppearListener(({ componentId, component
 
 // Listen for componentDidAppear screen events
 Navigation.events().registerComponentDidDisappearListener(({ componentId, componentName }) => {
-  console.log('Listen for componentDidDisappear screen events')
+  console.log('Listen for componentDidDisappear screen events');
   console.log(componentId, componentName);
 });
