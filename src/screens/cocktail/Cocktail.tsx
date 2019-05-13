@@ -5,8 +5,13 @@ import {
   View,
 } from 'react-native';
 
-interface Props {}
-const CocktailScreen = () => {
+interface Props {
+  componentId: string;
+};
+
+const Cocktail = ({ componentId }: Props) => {
+  console.log('props', componentId);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Cocktail!</Text>
@@ -28,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CocktailScreen;
+export default Cocktail;

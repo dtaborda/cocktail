@@ -3,13 +3,29 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
 } from 'react-native';
 
-interface Props {}
-const SearchScreen = () => {
+import { cocktailScreen } from '../';
+
+interface Props {
+  componentId: string;
+};
+
+const Search = ({ componentId }: Props) => {
+  const onGoCocktail = () => {
+    cocktailScreen(componentId)
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Search!</Text>
+      <TouchableHighlight
+        onPress={onGoCocktail}
+        activeOpacity={0.5}
+        underlayColor="transparent"
+      >
+        <Text style={styles.cocktail}>Cocktail</Text>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -26,6 +42,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  cocktail: {
+    backgroundColor: 'tomato',
+  }
 });
 
-export default SearchScreen;
+export default Search;
