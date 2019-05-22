@@ -1,5 +1,5 @@
 # React Native architecture
-## react-native-navigation, redux, saga
+### react-native-navigation, redux, saga
 
 An opinionated architecture with the following technical stack and configuration:
 
