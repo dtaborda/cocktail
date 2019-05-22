@@ -1,34 +1,42 @@
 import * as React from 'react';
 import {
+  Image,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import { CocktailBigCard } from '../../components';
+import * as Types from '../../services/api/api.types';
 
-interface Props {
-  componentId: string;
+export interface PropsTypes {
+  app: {
+    drink: Types.Drink;
+  };
 }
 
-const Cocktail = ({ componentId }: Props) => {
+const Cocktail = ({ app }: PropsTypes) => {
+  const { drink } = app;
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Cocktail!</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.content}>
+        <CocktailBigCard drink={drink} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#19bbd1',
   },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  content: {
+    flex: 1,
+    paddingTop: 4,
   },
+
 });
 
 export default Cocktail;

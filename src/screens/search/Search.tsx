@@ -1,49 +1,116 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
-  View,
 } from 'react-native';
+import {
+  RadioButton,
+  SearchCard,
+  SearchInput,
+  TouchableButton,
+} from '../../components';
 
-import { cocktailScreen } from '../';
+const filterList = [{
+  name: 'Cocktail glass',
+  query: 'g=Cocktail_glass',
+}, {
+  name: 'Vodka Cocktails',
+  query: 'i=Vodka',
+}];
 
-interface Props {
-  componentId: string;
+export interface FilterTypes {
+  name: string;
+  query: string;
 }
 
-const Search = ({ componentId }: Props) => {
-  const onGoCocktail = () => {
-    cocktailScreen(componentId);
+export interface PropTypes {
+  app: any;
+  onFilterCocktailListRequest: (filter: FilterTypes) => void;
+  onCloseSearchModal: () => void;
+}
+
+const Search = ({ onFilterCocktailListRequest, app, onCloseSearchModal }: PropTypes) => {
+  const [filter, setFilter] = useState<FilterTypes>({ name: '', query: '' });
+  const [searchText, setSearchText] = useState<string>('');
+
+  const RadioButtons = () => {
+    const filers = filterList.map((item: FilterTypes, index: number) => {
+      return (
+        <RadioButton
+          key={index}
+          label={item.name}
+          onPress={() => toggle(item)}
+          selected={filter && item.name === filter.name}
+        />
+      );
+    });
+
+    return [filers];
   };
+
+  const toggle = (data: any) => {
+    setFilter(data);
+  };
+
+  const onFocus = () => {
+    console.log('onFocus');
+  };
+
+  const onBlur = () => {
+    console.log('onBlur');
+  };
+
+  const onChangeText = (value: any) => {
+    setSearchText(value);
+  };
+
+  const onClearText = () => setSearchText('');
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Search!</Text>
-      <TouchableHighlight
-        onPress={onGoCocktail}
-        activeOpacity={0.5}
-        underlayColor="transparent"
-      >
-        <Text style={styles.cocktail}>Cocktail</Text>
-      </TouchableHighlight>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.content}>
+        <SearchCard>
+          <SearchInput
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onChangeText={onChangeText}
+            onClearText={onClearText}
+            value={searchText}
+          />
+          <Text style={styles.title}>Filter: </Text>
+          {RadioButtons()}
+          <TouchableButton
+            label="Search"
+            onPress={() => {
+              onFilterCocktailListRequest(filter);
+              onCloseSearchModal();
+            }}
+            disabled={filter.name === ''}
+            fetching={app.fetching}
+          />
+        </SearchCard>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#19bbd1',
+  },
+  content: {
+    flex: 1,
+    paddingTop: 4,
   },
   title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  cocktail: {
-    backgroundColor: 'tomato',
+    fontSize: 14,
+    color: '#000',
+    fontWeight: '900',
+    fontStyle: 'normal',
+    marginBottom: 10,
   },
 });
 
